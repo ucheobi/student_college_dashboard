@@ -23,12 +23,14 @@ const Card = ({ dashboardData }: DashboardProps) => {
                 value={totalClasses}
                 percent={13}
                 Icon={School2}
+                color="bg-green-secondary"
             />
             <CardContent
                 label="Average Performance"
                 value={averagePerformance}
                 percent={8}
                 Icon={ChartNoAxesColumnIncreasing}
+                color="bg-purple-800"
             />
             <CardContent
                 label="Top Performance"
@@ -44,10 +46,11 @@ type CardContentProps = {
     label: string;
     value: number | string;
     Icon: LucideIcon;
-    percent: number
+    percent: number;
+    color?: string;
 }
 
-const CardContent = ({ label, value, Icon, percent }: CardContentProps) => {
+const CardContent = ({ label, value, Icon, percent, color = "bg-blue-primary" }: CardContentProps) => {
 
 
     return (
@@ -58,7 +61,7 @@ const CardContent = ({ label, value, Icon, percent }: CardContentProps) => {
                 <p className="text-[7px] text-gray-600 "><span className="text-green-700">{percent}%</span> from last month </p>
             </div>
             <div className="flex items-center">
-                <Icon className="w-6 rounded-lg p-1 bg-blue-primary text-white dark:text-gray-400" />
+                <Icon className={`w-6 rounded-lg p-1.5 ${color} text-white dark:text-gray-400`} />
             </div>
         </div>
     )

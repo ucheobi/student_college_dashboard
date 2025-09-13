@@ -9,14 +9,15 @@ import { useState } from "react";
 const Sidebar = () => {
     const [isSidebarCollapsed, setIsSideBarCollapse] = useState(false)
     
-    const sideBarClassNames =`flex flex-col fixed h-full justify-between shadow-xl transition-all 
-    duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white"}`;
+    const sideBarClassNames =`flex flex-col fixed h-full justify-between bg-white shadow-xl transition-all
+        duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white pr-4`;
 
     return (
         <div className={sideBarClassNames}>
             <div className="flex flex-col w-full h-full justify-start">
                 {/* Top Logo */}
                 <div className="flex z-50 min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
+                    <div></div>
                    {isSidebarCollapsed ? null : (
                         <button className="py-3" onClick={() => setIsSideBarCollapse(!isSidebarCollapsed)}>
                             <X className="h-6 w-6 text-gray-800 hover:text-gray-600 dark:text-white" />
@@ -38,7 +39,7 @@ const Sidebar = () => {
                 </div>
 
                 {/* Navbar Links */}
-                <nav className="z-10 w-full">
+                <nav className="z-10 w-full text-xs">
                     <SidebarLink href="/" Icon={Home} label="Dashboard" />
                     <SidebarLink href="/timeline" Icon={Trophy} label="Leaderboard" />
                     <SidebarLink href="/search" Icon={Users} label="Students" />
@@ -79,11 +80,11 @@ const SidebarLink = ({ href, Icon, label,  }: SidebarLinkProps) => {
     const isActive = pathname === href || (pathname === "/" && href === "/dashboard");
 
     return (
-        <Link href={href} className="w-full">
-            <div className={`flex relative rounded-lg cursor-pointer items-center gap-3 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
+        <Link href={href} className="w-full text-[8px]">
+            <div className={`flex relative rounded-xl ml-10 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
                     ${isActive ? "bg-blue-primary text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}>
 
-                <Icon className={`h-6 w-6 text-gray-800 dark:text-gray-100 ${isActive ? "text-white" : ""}`} />
+                <Icon className={`h-4 w-6 text-gray-800 dark:text-gray-100 ${isActive ? "text-white" : ""}`} />
                 <span className={`font-medium text-gray-800 dark:text-gray-100 ${isActive ? "text-white " : ""}`}>{label}</span>
             </div>
         </Link>
