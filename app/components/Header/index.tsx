@@ -4,16 +4,18 @@ type HeaderProps = {
     name: string;
     buttonComponent?: React.ReactNode;
     isSmallText?: boolean;
+    description?: string
 }
 
-const Header = ({ name, buttonComponent, isSmallText = false}: HeaderProps) => {
+const Header = ({ name, buttonComponent, description }: HeaderProps) => {
 
   return (
-    <div className="mb-5 flex w-full items-center justify-between">
-        <h1 className={`${isSmallText ? "text-lg" : "text-2xl"} font-semibold dark:text-white`}>
+    <div className="mb-5 flex flex-col w-full justify-between">
+        {buttonComponent}
+        <h1 className={`text-lg text-blue-500 font-bold dark:text-white`}>
             {name}
         </h1>
-        {buttonComponent}
+        <p className="text-[8px] text-gray-500">{description}</p>
     </div>
   )
 }
