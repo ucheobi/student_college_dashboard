@@ -54,3 +54,18 @@ export type DashboardData = {
     }[];
   };
 };
+
+export interface initialStateTypes {
+    isSidebarCollaped: boolean;
+    isDarkMode: boolean;
+    dashboardData: DashboardData
+}
+
+export type ClassPerformanceProps = {
+  class: string;
+  averageScore: number;
+}
+
+export type ClassPerformanceDataProps = {
+  classPerformance: ClassPerformanceProps[]
+}
