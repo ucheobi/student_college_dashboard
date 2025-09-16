@@ -1,25 +1,27 @@
 'use client';
 
+import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { toggleSidebar } from "@/state";
 import { Home,  LockIcon, LucideIcon, Settings, ChartColumnIncreasing, Trophy, LogOut, Users, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 const Sidebar = () => {
-    const [isSidebarCollapsed, setIsSideBarCollapse] = useState(false)
+    const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped)
+    const dispatch = useAppDispatch();
     
-    const sideBarClassNames =`flex flex-col fixed h-full justify-between bg-white shadow-xl transition-all
-        duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white pr-4`;
+    const sideBarClassNames =`flex flex-col hidden md:block fixed h-full justify-between bg-white shadow-xl transition-all
+        duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white pr-4 ${isSidebarCollapsed ? "w-0 hidden" : "w-66"}`;
 
     return (
         <div className={sideBarClassNames}>
             <div className="flex flex-col w-full h-full justify-start">
                 {/* Top Logo */}
                 <div className="flex z-50 min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
-                    <div></div>
-                   {isSidebarCollapsed ? null : (
-                        <button className="py-3" onClick={() => setIsSideBarCollapse(!isSidebarCollapsed)}>
+                   
+                    {isSidebarCollapsed ? null : (
+                        <button className="py-3" onClick={() => dispatch(toggleSidebar(!isSidebarCollapsed))}>
                             <X className="h-6 w-6 text-gray-800 hover:text-gray-600 dark:text-white" />
                         </button>
                     )}
@@ -80,7 +82,7 @@ const SidebarLink = ({ href, Icon, label,  }: SidebarLinkProps) => {
     const isActive = pathname === href || (pathname === "/" && href === "/dashboard");
 
     return (
-        <Link href={href} className="w-full text-[8px]">
+        <Link href={href} className="w-full text-[10px]">
             <div className={`flex relative rounded-xl ml-10 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
                     ${isActive ? "bg-blue-primary text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}>
 

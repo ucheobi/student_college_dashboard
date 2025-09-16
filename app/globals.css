@@ -12,6 +12,8 @@ body,
 .app {
   height: 100%;
   width: 100%;
+  margin: auto;
+  @apply lg:w-[90%];
   @apply text-sm;
   @apply bg-white;
   @apply dark:bg-black;
@@ -52,4 +54,9 @@ body,
   /* gradients */
   --background-gradient-radial: radial-gradient(var(--tw-gradient-stops));
   --background-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+
+  --breakpoint-2xs: 30rem;
+  --breakpoint-2sm: 72rem;
+  --breakpoint-2md: 60rem;
+  --breakpoint-2xl: 90rem;  
 }

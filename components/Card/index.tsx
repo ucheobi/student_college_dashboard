@@ -11,7 +11,7 @@ const Card = ({ dashboardData }: DashboardProps) => {
     const { totalClasses, totalStudents, averagePerformance, topPerformer } = dashboardData.dashboard
 
     return (
-       <div className="flex gap-3">
+       <div className="grid gap-4 w-full m-auto grid-col-1 md:grid-cols-2 lg:grid-cols-4 md:w-full">
             <CardContent
                 label="Total Students"
                 value={totalStudents}
@@ -51,17 +51,15 @@ type CardContentProps = {
 }
 
 const CardContent = ({ label, value, Icon, percent, color = "bg-blue-primary" }: CardContentProps) => {
-
-
     return (
-        <div className="flex gap-3 justify-between p-3 rounded-lg border-none w-44 h-22 bg-white shadow-lg">
-            <div className="flex flex-col justify-between">
-                <h4 className="text-gray-800 text-[8px] uppercase">{label}</h4>
-                <h2 className="font-bold text-xl">{value}</h2>
-                <p className="text-[7px] text-gray-600 "><span className="text-green-700">{percent}%</span> from last month </p>
+        <div className="flex gap-2 w-full justify-between p-3 rounded-lg border-none h-38 bg-white shadow-lg">
+            <div className="flex flex-col justify-between ml-4">
+                <h4 className="text-gray-800 text-md uppercase">{label}</h4>
+                <h2 className="font-bold text-3xl md:text-xl">{value}</h2>
+                <p className="text-[8px] text-gray-600 "><span className="text-green-700">{percent}%</span> from last month </p>
             </div>
-            <div className="flex items-center">
-                <Icon className={`w-6 rounded-lg p-1.5 ${color} text-white dark:text-gray-400`} />
+            <div className="flex items-center mr-4">
+                <Icon className={`w-10 rounded-lg p-1.5 ${color} size-12 md:size-8 text-white dark:text-gray-400`} />
             </div>
         </div>
     )

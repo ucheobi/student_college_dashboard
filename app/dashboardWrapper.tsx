@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
 import { useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import StoreProvider, { useAppSelector } from "./redux";
 
-
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped);
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollaped,
+  );
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
   useEffect(() => {
@@ -19,15 +20,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   });
 
   return (
-    <div className="flex min-h-screen w-full text-gray-900 px-16">
-      {/* sidebar */}
+    <div className="flex min-h-screen w-full px-10 text-gray-900">
       <Sidebar />
-      
       <main className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${isSidebarCollapsed ? "" : "md:pl-64"}`}>
         <Navbar />
-        <div className="bg-gray-200 ml-2">
-          {children}
-        </div>
+        <div className="bg-gray-200">{children}</div>
       </main>
     </div>
   );
@@ -37,8 +34,8 @@ const DashboardWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <StoreProvider>
       <DashboardLayout>{children}</DashboardLayout>
-    </StoreProvider> 
+    </StoreProvider>
   );
-}
+};
 
 export default DashboardWrapper;
