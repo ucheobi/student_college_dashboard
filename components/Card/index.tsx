@@ -52,14 +52,14 @@ type CardContentProps = {
 
 const CardContent = ({ label, value, Icon, percent, color = "bg-blue-primary" }: CardContentProps) => {
     return (
-        <div className="flex gap-2 w-full justify-between p-3 rounded-lg border-none h-38 bg-white shadow-lg">
+        <div className="flex w-full justify-between p-3 rounded-lg border-none h-28 bg-white shadow-lg dark:bg-gray-950">
             <div className="flex flex-col justify-between ml-4">
-                <h4 className="text-gray-800 text-md uppercase">{label}</h4>
-                <h2 className="font-bold text-3xl md:text-xl">{value}</h2>
-                <p className="text-[8px] text-gray-600 "><span className="text-green-700">{percent}%</span> from last month </p>
+                <h4 className="text-gray-800 text-md uppercase dark:text-white">{label}</h4>
+                <h2 className="font-bold text-3xl md:text-xl dark:text-white">{value}</h2>
+                <p className="text-[8px] text-gray-600 dark:text-white"><span className="text-green-700 dark:text-green-600">{percent}%</span> from last month </p>
             </div>
             <div className="flex items-center mr-4">
-                <Icon className={`w-10 rounded-lg p-1.5 ${color} size-12 md:size-8 text-white dark:text-gray-400`} />
+                <Icon className={`w-10 rounded-lg p-1.5 ${color} size-12 md:size-8 text-white`} />
             </div>
         </div>
     )

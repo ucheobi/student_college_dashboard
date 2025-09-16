@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { toggleDarkMode, toggleSidebar } from "@/state";
-import { Menu, Moon, Settings, Sun, X } from "lucide-react";
+import { Menu, Moon, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 
 const Navbar = () => {

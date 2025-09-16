@@ -11,15 +11,14 @@ const Sidebar = () => {
     const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped)
     const dispatch = useAppDispatch();
     
-    const sideBarClassNames =`flex flex-col hidden md:block fixed h-full justify-between bg-white shadow-xl transition-all
+    const sideBarClassNames =`flex flex-col hidden md:block fixed justify-between bg-white shadow-xl transition-all
         duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white pr-4 ${isSidebarCollapsed ? "w-0 hidden" : "w-66"}`;
 
     return (
         <div className={sideBarClassNames}>
-            <div className="flex flex-col w-full h-full justify-start">
+            <div className="flex flex-col w-full h-full justify-start ">
                 {/* Top Logo */}
-                <div className="flex z-50 min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
-                   
+                <div className="flex z-50 min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">         
                     {isSidebarCollapsed ? null : (
                         <button className="py-3" onClick={() => dispatch(toggleSidebar(!isSidebarCollapsed))}>
                             <X className="h-6 w-6 text-gray-800 hover:text-gray-600 dark:text-white" />
