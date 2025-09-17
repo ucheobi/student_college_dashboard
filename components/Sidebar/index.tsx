@@ -8,66 +8,63 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
-    const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped)
-    const dispatch = useAppDispatch();
-    
-    const sideBarClassNames =`flex flex-col hidden md:block fixed justify-between bg-white shadow-xl transition-all
-        duration-300 z-40 h-full dark:bg-black overflow-y-auto bg-white pr-4 ${isSidebarCollapsed ? "w-0 hidden" : "w-66"}`;
+  const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped)
+  const dispatch = useAppDispatch();
+  
+  const sideBarClassNames = `
+    flex flex-col hidden md:flex fixed bg-white shadow-xl transition-all
+    duration-300 z-40 dark:bg-black h-full
+    ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}
+  `;
 
-    return (
-        <div className={sideBarClassNames}>
-            <div className="flex flex-col w-full h-full justify-start ">
-                {/* Top Logo */}
-                <div className="flex z-50 min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">         
-                    {isSidebarCollapsed ? null : (
-                        <button className="py-3" onClick={() => dispatch(toggleSidebar(!isSidebarCollapsed))}>
-                            <X className="h-6 w-6 text-gray-800 hover:text-gray-600 dark:text-white" />
-                        </button>
-                    )}
-                </div>
-
-                <div className="flex items-center gap-3 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
-                    <Image src="/logo.png" alt="Logo" width={40} height={40}  />
-                    <div>
-                        <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
-                            ExtraCollege
-                        </h3>
-                        <div className="mt-1 flex items-start gap-2">
-                            <LockIcon className="mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400" />
-                            <p className="text-xs text-gray-500">Admin Panel</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Navbar Links */}
-                <nav className="z-10 w-full text-xs">
-                    <SidebarLink href="/" Icon={Home} label="Dashboard" />
-                    <SidebarLink href="/timeline" Icon={Trophy} label="Leaderboard" />
-                    <SidebarLink href="/search" Icon={Users} label="Students" />
-                    <SidebarLink href="/users" Icon={ChartColumnIncreasing} label="Analytics" />
-                    <SidebarLink href="/settings" Icon={Settings} label="Settings" />
-                </nav>
-            
-            </div>
-
-            <div className="flex items-center gap-3 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
-                <Image src="/logo.png" alt="Logo" width={40} height={40}  />
-                <div>
-                    <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
-                        School Admin
-                    </h3>
-                    <div className="mt-1 flex items-start gap-2">
-                        <p className="text-xs text-gray-500">School Admin</p>
-                    </div>
-                </div>
-                <div>
-                    <LogOut className="mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400" />
-                </div>
-            </div>
-           
+  return (
+    <div className={sideBarClassNames}>
+      <div className="flex-1 flex flex-col overflow-y-auto">
+        <div className="flex z-50 min-h-[56px] items-center justify-between bg-white px-6 pt-3 dark:bg-black">         
+          {!isSidebarCollapsed && (
+            <button className="py-3" onClick={() => dispatch(toggleSidebar(!isSidebarCollapsed))}>
+              <X className="h-6 w-6 text-gray-800 hover:text-gray-600 dark:text-white" />
+            </button>
+          )}
         </div>
-    )
-}
+
+        <div className="flex items-center gap-3 border-b px-8 py-4 mb-4 border-gray-200 dark:border-gray-700">
+          <Image src="/logo.png" alt="Logo" width={40} height={40} />
+          <div>
+            <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
+              ExtraCollege
+            </h3>
+            <div className="mt-1 flex items-start gap-2">
+              <LockIcon className="mt-[0.1rem] h-3 w-3 text-gray-500 dark:text-gray-400" />
+              <p className="text-xs text-gray-500">Admin Panel</p>
+            </div>
+          </div>
+        </div>
+
+        <nav className="z-10 w-full text-xs">
+          <SidebarLink href="/" Icon={Home} label="Dashboard" />
+          <SidebarLink href="/timeline" Icon={Trophy} label="Leaderboard" />
+          <SidebarLink href="/search" Icon={Users} label="Students" />
+          <SidebarLink href="/users" Icon={ChartColumnIncreasing} label="Analytics" />
+          <SidebarLink href="/settings" Icon={Settings} label="Settings" />
+        </nav>
+      </div>
+
+      <div className="border-t border-gray-200 px-8 py-4 flex items-center justify-between dark:border-gray-700">
+        <div className="flex items-center gap-3">
+          <Image src="/logo.png" alt="Logo" width={40} height={40} />
+          <div>
+            <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
+              School Admin
+            </h3>
+            <p className="text-xs text-gray-500">School Admin</p>
+          </div>
+        </div>
+        <LogOut className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+      </div>
+    </div>
+  );
+};
 
 interface SidebarLinkProps {
     href: string;
