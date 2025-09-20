@@ -10,6 +10,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
         id: "", 
         name: "", 
         grade: "", 
+        imageUrl: "",
         score: 0,
         accuracy: 0,
         sessions: 0,
@@ -20,6 +21,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
         id: "", 
         name: "", 
         grade: "", 
+        imageUrl: "",
         streak: 0,
         score: 0,
         accuracy: 0,
@@ -31,6 +33,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
         name: "", 
         grade: "",
         score: 0,
+        imageUrl: "",
         accuracy: 0,
         sessions: 0,
         streak: 0,
@@ -41,6 +44,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
         name: "", 
         grade: "", 
         sessions: 0,
+        imageUrl: "",
         score: 0,
         accuracy: 0,
         streak: 0,
@@ -50,6 +54,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
         id: "", 
         name: "", 
         grade: "", 
+        imageUrl: "",
         accuracy: 0,
         score: 0,
         sessions: 0,
@@ -63,6 +68,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
       topScorer: {
         id: "", 
         name: "", 
+        imageUrl: "",
         grade: "", 
         accuracy: 0,
         score: 0,
@@ -86,7 +92,7 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
 
   const longestStreak = currentChampion;
 
-  const mostActive = [...students].sort((a, b) => b.sessions - a.sessions)[0];
+  const mostActive = [...students].sort((a, b) => (b.sessions ?? 0) - (a.sessions ?? 0))[0];
 
   const highestAccuracy = [...students].sort(
     (a, b) => b.accuracy - a.accuracy
@@ -95,10 +101,10 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
   const totalLearningHours = students.reduce((acc, student) => acc + student.hours, 0);
 
   const avgSessionTime = `${Math.round(
-    (totalLearningHours * 60) / students.reduce((acc, student) => acc + student.sessions, 0)
+    (totalLearningHours * 60) / students.reduce((acc, student) => acc + (student.sessions ?? 0), 0)
   )}m`;
 
-  const activeStudents = students.filter(s => s.sessions > 20).length; // 20 most active students
+  const activeStudents = students.filter(s => (s.sessions ?? 0) > 20).length; // 20 most active students
 
   const topScorers = [...students]
     .sort((a, b) => b.score - a.score)
@@ -157,5 +163,26 @@ export function getPerformanceDistribution(students: Student[]) {
     { name: "Average", value: average },
     { name: "Needs Improvement", value: needsImprovement },
   ];
+}
+
+export function estimateLessonsFromStudent(student: Student, lessonHours = 0.5) {
+  if (typeof student.totalLessons === "number") return student.totalLessons;
+  if (typeof student.sessions === "number" && student.sessions > 0) return student.sessions;
+  if (typeof student.hours === "number" && student.hours > 0)
+    return Math.round(student.hours / lessonHours);
+  return 0;
+}
+
+export function getMostLessons(students: Student[]) {
+  if (!students || students.length === 0) return null;
+
+  let best: { student: Student; lessons: number } | null = null;
+
+  for (const s of students) {
+    const lessons = estimateLessonsFromStudent(s);
+    if (!best || lessons > best.lessons) best = { student: s, lessons };
+  }
+
+  return best;
 }
 

@@ -32,7 +32,12 @@ const StudentsDistribution = () => {
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 my-6">
       {/* Average performance barchart */}
       <div className="w-full h-120 p-6 bg-white shadow-lg rounded-xl dark:bg-gray-950">
-        <Header name="Average Performance by Grade" color={headerColor} description="Student distribution across different grades"  />
+        <Header 
+          name="Average Performance by Grade" 
+          color={headerColor} 
+          isSmallText={true}
+          description="Student distribution across different grades"  
+        />
         <ResponsiveContainer width="100%" height="70%" className="pb-10">
           <BarChart
             data={classPerformance}
@@ -49,7 +54,12 @@ const StudentsDistribution = () => {
     {/* Performance distribution pie chart */}
     <div className="h-120 bg-white shadow rounded-xl p-4 dark:bg-gray-950">
         <div className="w-full h-80 mb-6">
-          <Header name="Performance Distribution" color={headerColor} description="Overall accuracy breakdown across all students" />
+          <Header 
+            name="Performance Distribution" 
+            color={headerColor} 
+            description="Overall accuracy breakdown across all students" 
+            isSmallText={true}
+          />
           <ResponsiveContainer className="pb-10">
             <PieChart>
               <Pie

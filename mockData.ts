@@ -1,61 +1,44 @@
-const dashboardData = {
-  "dashboard": {
-    "totalStudents": 320,
-    "totalClasses": 12,
-    "averagePerformance": "82%",
-    "topPerformer": {
-      "id": "S045",
-      "name": "Alice Johnson",
-      "class": "Grade 9",
-      "score": 98
-    },
-    "currentChampion": {
-      "id": "S078",
-      "name": "David Kim",
-      "class": "Grade 10",
-      "streak": 12
-    },
-    "longestStreak": {
-      "id": "S034",
-      "name": "Maria Gonzalez",
-      "class": "Grade 8",
-      "days": 25
-    },
-    "mostActive": {
-      "id": "S102",
-      "name": "Liam Smith",
-      "class": "Grade 11",
-      "sessions": 65
-    },
-    "highestAccuracy": {
-      "id": "S056",
-      "name": "Sophia Chen",
-      "class": "Grade 7",
-      "accuracy": "97%"
-    },
-    "totalLearningHours": 1280,
-    "averageSessionTime": "42m",
-    "activeStudents": 210,
-    "topScorers": [
-      { "id": "S001", "name": "John Doe", "class": "Grade 8", "score": 95 },
-      { "id": "S045", "name": "Alice Johnson", "class": "Grade 9", "score": 98 },
-      { "id": "S056", "name": "Sophia Chen", "class": "Grade 7", "score": 97 },
-      { "id": "S102", "name": "Liam Smith", "class": "Grade 11", "score": 94 }
-    ],
-    "classPerformance": [
-      { "class": "Grade 6", "averageScore": 78 },
-      { "class": "Grade 7", "averageScore": 84 },
-      { "class": "Grade 8", "averageScore": 81 },
-      { "class": "Grade 9", "averageScore": 87 },
-      { "class": "Grade 10", "averageScore": 85 },
-      { "class": "Grade 11", "averageScore": 80 }
-    ],
-    "recentActivities": [
-      { "id": 1, "student": "John Doe", "activity": "Completed Math Quiz", "timestamp": "2025-09-11T09:15:00Z" },
-      { "id": 2, "student": "Sophia Chen", "activity": "Achieved 97% in Science", "timestamp": "2025-09-11T11:45:00Z" },
-      { "id": 3, "student": "David Kim", "activity": "Maintained 12-day streak", "timestamp": "2025-09-12T08:30:00Z" }
-    ]
-  }
-}
+const students = [
+    { "id": "S001", "name": "Ahan Kumar", "grade": "Grade 8", "score": 830, "accuracy": 96, "sessions": 68, "imageUrl": "p1.jpeg", "streak": 15, "hours": 120 },
+    { "id": "S002", "name": "Hvff", "grade": "Grade 7", "score": 295, "accuracy": 94, "sessions": 45, "imageUrl": "p2.jpeg", "streak": 12, "hours": 75 },
+    { "id": "S003", "name": "Flower Girl", "grade": "Grade 6", "score": 190, "accuracy": 93, "sessions": 38, "imageUrl": "p3.jpeg", "streak": 8, "hours": 60 },
+    { "id": "S004", "name": "June Child Test", "grade": "Grade 5", "score": 165, "accuracy": 92, "sessions": 32, "imageUrl": "p4.jpeg", "streak": 6, "hours": 58 },
+    { "id": "S005", "name": "Hcdff", "grade": "Grade 4", "score": 160, "accuracy": 91, "sessions": 30, "imageUrl": "p5.jpeg", "streak": 5, "hours": 55 },
+    { "id": "S006", "name": "Eva", "grade": "Grade 3", "score": 145, "accuracy": 90, "sessions": 28, "imageUrl": "p6.jpeg", "streak": 4, "hours": 52 },
+    { "id": "S007", "name": "Sophia Kim", "grade": "Grade 2", "score": 138, "accuracy": 89, "sessions": 26, "imageUrl": "p7.jpeg", "streak": 4, "hours": 50 },
+    { "id": "S008", "name": "James Wilson", "grade": "Grade 6", "score": 132, "accuracy": 88, "sessions": 24, "imageUrl": "p8.jpeg", "streak": 3, "hours": 49 },
+    { "id": "S009", "name": "Olivia Davis", "grade": "Grade 5", "score": 128, "accuracy": 87, "sessions": 22, "imageUrl": "p9.jpeg", "streak": 3, "hours": 48 },
+    { "id": "S010", "name": "Liam Garcia", "grade": "Grade 1", "score": 120, "accuracy": 86, "sessions": 20, "imageUrl": "p10.jpeg", "streak": 2, "hours": 45 },
+    { "id": "S011", "name": "Noah Thompson", "grade": "Grade 4", "score": 115, "accuracy": 83, "sessions": 19, "imageUrl": "p11.jpeg", "streak": 2, "hours": 44 },
+    { "id": "S012", "name": "Ava Martinez", "grade": "Grade 3", "score": 110, "accuracy": 85, "sessions": 18, "imageUrl": "p12.jpeg", "streak": 1, "hours": 42 },
+    { "id": "S013", "name": "Mason Brown", "grade": "Grade 7", "score": 300, "accuracy": 92, "sessions": 40, "imageUrl": "p13.jpeg", "streak": 9, "hours": 70 },
+    { "id": "S014", "name": "Ethan Lee", "grade": "Grade 9", "score": 410, "accuracy": 95, "sessions": 55, "imageUrl": "p14.jpeg", "streak": 11, "hours": 88 },
+    { "id": "S015", "name": "Isabella Lopez", "grade": "Grade 8", "score": 270, "accuracy": 89, "sessions": 35, "imageUrl": "p15.jpeg", "streak": 6, "hours": 62 },
+    { "id": "S016", "name": "Sophia Chen", "grade": "Grade 7", "score": 390, "accuracy": 97, "sessions": 60, "imageUrl": "p16.jpeg", "streak": 10, "hours": 95 },
+    { "id": "S017", "name": "Liam Smith", "grade": "Grade 11", "score": 420, "accuracy": 94, "sessions": 72, "imageUrl": "p17.jpeg", "streak": 13, "hours": 110 },
+    { "id": "S018", "name": "Emily Clark", "grade": "Grade 10", "score": 250, "accuracy": 88, "sessions": 33, "imageUrl": "p18.jpeg", "streak": 5, "hours": 61 },
+    { "id": "S019", "name": "Daniel Martinez", "grade": "Grade 6", "score": 200, "accuracy": 91, "sessions": 28, "imageUrl": "p19.jpeg", "streak": 6, "hours": 54 },
+    { "id": "S020", "name": "Mia Rodriguez", "grade": "Grade 5", "score": 310, "accuracy": 93, "sessions": 48, "imageUrl": "p20.jpeg", "streak": 8, "hours": 82 },
+    { "id": "S021", "name": "Benjamin Scott", "grade": "Grade 9", "score": 340, "accuracy": 90, "sessions": 52, "imageUrl": "p21.jpeg", "streak": 12, "hours": 87 },
+    { "id": "S022", "name": "Charlotte White", "grade": "Grade 4", "score": 220, "accuracy": 89, "sessions": 27, "imageUrl": "p22.jpeg", "streak": 4, "hours": 59 },
+    { "id": "S023", "name": "Henry Adams", "grade": "Grade 3", "score": 180, "accuracy": 86, "sessions": 23, "imageUrl": "p23.jpeg", "streak": 3, "hours": 47 },
+    { "id": "S024", "name": "Amelia Johnson", "grade": "Grade 2", "score": 260, "accuracy": 92, "sessions": 37, "imageUrl": "p24.jpeg", "streak": 7, "hours": 68 },
+    { "id": "S025", "name": "Lucas Perez", "grade": "Grade 8", "score": 330, "accuracy": 94, "sessions": 50, "imageUrl": "p25.jpeg", "streak": 9, "hours": 89 },
+    { "id": "S026", "name": "Ella Brown", "grade": "Grade 5", "score": 280, "accuracy": 90, "sessions": 42, "imageUrl": "p26.jpeg", "streak": 6, "hours": 73 },
+    { "id": "S027", "name": "Jack Miller", "grade": "Grade 7", "score": 305, "accuracy": 93, "sessions": 46, "imageUrl": "p27.jpeg", "streak": 10, "hours": 77 },
+    { "id": "S028", "name": "Scarlett King", "grade": "Grade 6", "score": 240, "accuracy": 89, "sessions": 34, "imageUrl": "p28.jpeg", "streak": 5, "hours": 65 },
+    { "id": "S029", "name": "Alexander Green", "grade": "Grade 9", "score": 360, "accuracy": 96, "sessions": 58, "imageUrl": "p29.jpeg", "streak": 14, "hours": 98 },
+    { "id": "S030", "name": "Victoria Hall", "grade": "Grade 10", "score": 275, "accuracy": 87, "sessions": 31, "imageUrl": "p30.jpeg", "streak": 4, "hours": 64 },
+    { "id": "S031", "name": "Chloe Rivera", "grade": "Grade 8", "score": 210, "accuracy": 79, "sessions": 28, "imageUrl": "p31.jpeg", "streak": 5, "hours": 60 },
+    { "id": "S032", "name": "Ryan Walker", "grade": "Grade 6", "score": 185, "accuracy": 76, "sessions": 26, "imageUrl": "p32.jpeg", "streak": 4, "hours": 55 },
+    { "id": "S033", "name": "Harper Lewis", "grade": "Grade 5", "score": 172, "accuracy": 74, "sessions": 23, "imageUrl": "p33.jpeg", "streak": 3, "hours": 50 },
+    { "id": "S034", "name": "Evelyn Torres", "grade": "Grade 7", "score": 198, "accuracy": 78, "sessions": 30, "imageUrl": "p34.jpeg", "streak": 6, "hours": 58 },
+    { "id": "S035", "name": "Matthew Young", "grade": "Grade 9", "score": 220, "accuracy": 75, "sessions": 32, "imageUrl": "p35.jpeg", "streak": 5, "hours": 63 },
+    { "id": "S036", "name": "Zoey Hernandez", "grade": "Grade 4", "score": 165, "accuracy": 73, "sessions": 20, "imageUrl": "p36.jpeg", "streak": 2, "hours": 48 },
+    { "id": "S037", "name": "Nathan Baker", "grade": "Grade 3", "score": 140, "accuracy": 69, "sessions": 18, "imageUrl": "p37.jpeg", "streak": 2, "hours": 45 },
+    { "id": "S038", "name": "Lily Gonzalez", "grade": "Grade 2", "score": 120, "accuracy": 66, "sessions": 15, "imageUrl": "p38.jpeg", "streak": 1, "hours": 40 },
+    { "id": "S039", "name": "Owen Carter", "grade": "Grade 5", "score": 100, "accuracy": 62, "sessions": 14, "imageUrl": "p39.jpeg", "streak": 1, "hours": 38 },
+    { "id": "S040", "name": "Aria Mitchell", "grade": "Grade 1", "score": 90, "accuracy": 65, "sessions": 12, "imageUrl": "p40.jpeg", "streak": 1, "hours": 35 }
+];
 
-export default dashboardData;
+export default students;
