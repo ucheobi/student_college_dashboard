@@ -1,14 +1,14 @@
 
-import { DashboardData } from "@/types"
+import { DashboardSummary } from "@/types"
 import { LucideIcon, School2, UsersRound, ChartNoAxesColumnIncreasing, Trophy } from "lucide-react"
 
 type DashboardProps =  {
-    dashboardData: DashboardData
+    dashboardData: DashboardSummary
 }
 
 
 const Card = ({ dashboardData }: DashboardProps) => {
-    const { totalClasses, totalStudents, averagePerformance, topPerformer } = dashboardData.dashboard
+    const { totalClasses, totalStudents, averagePerformance, topPerformer } = dashboardData
 
     return (
        <div className="grid gap-4 w-full m-auto grid-col-1 md:grid-cols-2 lg:grid-cols-4 md:w-full">

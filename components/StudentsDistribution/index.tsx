@@ -1,6 +1,5 @@
 "use client";
 
-import { ClassPerformanceDataProps } from "@/types";
 import {
   BarChart,
   Bar,
@@ -15,12 +14,17 @@ import {
 } from "recharts";
 import Header from "../Header";
 import { useAppSelector } from "@/app/redux";
+import { getClassPerformance, getPerformanceDistribution } from "@/utils";
 
 const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#14b8a6"];
 
+const StudentsDistribution = () => {
+  const isDarkMode = useAppSelector((state) => state.ui.isDarkMode)
+  const students = useAppSelector((state) => state.students);
 
-const ClassPerformanceChart = ({ classPerformance }: ClassPerformanceDataProps) => {
-  const isDarkMode = useAppSelector((state) => state.global.isDarkMode)
+  const classPerformance = getClassPerformance(students);
+  const performanceDistribution = getPerformanceDistribution(students);
+  
   const tickColor = isDarkMode ? "#ffffff" : "";
   const headerColor = isDarkMode ? "text-white" : "text-blue-primary"
 
@@ -32,7 +36,6 @@ const ClassPerformanceChart = ({ classPerformance }: ClassPerformanceDataProps) 
         <ResponsiveContainer width="100%" height="70%" className="pb-10">
           <BarChart
             data={classPerformance}
-            margin={{ top: 20, right: 30, left: 10, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="class" tick={{ fill: tickColor }} />
@@ -50,14 +53,14 @@ const ClassPerformanceChart = ({ classPerformance }: ClassPerformanceDataProps) 
           <ResponsiveContainer className="pb-10">
             <PieChart>
               <Pie
-                data={classPerformance}
-                dataKey="averageScore"
-                nameKey="class"
+                data={performanceDistribution}
+                dataKey="value"
+                nameKey="name"
                 cx="50%"
                 cy="50%"
                 outerRadius={100}
               >
-                {classPerformance.map((_, index) => (
+                {performanceDistribution.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -90,4 +93,4 @@ const ClassPerformanceChart = ({ classPerformance }: ClassPerformanceDataProps) 
   );
 };
 
-export default ClassPerformanceChart;
+export default StudentsDistribution;

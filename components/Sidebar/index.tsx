@@ -1,14 +1,14 @@
 'use client';
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
-import { toggleSidebar } from "@/state";
+import { toggleSidebar  } from "@/state/uiSlice";
 import { Home,  LockIcon, LucideIcon, Settings, ChartColumnIncreasing, Trophy, LogOut, Users, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
-  const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollaped)
+  const isSidebarCollapsed = useAppSelector((state) => state.ui.isSidebarCollapsed)
   const dispatch = useAppDispatch();
   
   const sideBarClassNames = `

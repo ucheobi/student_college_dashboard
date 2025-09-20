@@ -1,6 +1,77 @@
 import { Student, DashboardSummary } from "@/types";
 
-export function computeDashboard(students: Student[]): DashboardSummary {
+export function computeDashboard(students: Student[] = []): DashboardSummary {
+  if (!students || students.length === 0 ) {
+    return {
+      totalStudents: 0,
+      totalClasses: 0,
+      averagePerformance: "",
+      topPerformer: {
+        id: "", 
+        name: "", 
+        grade: "", 
+        score: 0,
+        accuracy: 0,
+        sessions: 0,
+        streak: 0,
+        hours: 0
+      },
+      currentChampion: {
+        id: "", 
+        name: "", 
+        grade: "", 
+        streak: 0,
+        score: 0,
+        accuracy: 0,
+        sessions: 0,
+        hours: 0
+      },
+      longestStreak: {
+        id: "",
+        name: "", 
+        grade: "",
+        score: 0,
+        accuracy: 0,
+        sessions: 0,
+        streak: 0,
+        hours: 0
+      },
+      mostActive: {
+        id: "", 
+        name: "", 
+        grade: "", 
+        sessions: 0,
+        score: 0,
+        accuracy: 0,
+        streak: 0,
+        hours: 0
+      },
+      highestAccuracy: {
+        id: "", 
+        name: "", 
+        grade: "", 
+        accuracy: 0,
+        score: 0,
+        sessions: 0,
+        streak: 0,
+        hours: 0
+      },
+      totalLearningHours: 0,
+      averageSessionTime: "",
+      activeStudents: 0,
+      topScorers: [],
+      topScorer: {
+        id: "", 
+        name: "", 
+        grade: "", 
+        accuracy: 0,
+        score: 0,
+        sessions: 0,
+        streak: 0,
+        hours: 0
+      }
+    };
+  }
   const totalStudents = students.length;
 
   const totalClasses = new Set(students.map(student => student.grade)).size;
@@ -31,45 +102,11 @@ export function computeDashboard(students: Student[]): DashboardSummary {
 
   const topScorers = [...students]
     .sort((a, b) => b.score - a.score)
-    .slice(0, 10);
+    .slice(0, 10); // top 10 scorers
 
   const topScorer = [...students]
     .sort((a, b) => b.score - a.score)[0];
 
-    // Class performance (for bbar chart)
-  const gradeMap: Record<string, { total: number; count: number }> = {};
-  students.forEach((student) => {
-    if (!gradeMap[student.grade]) gradeMap[student.grade] = { total: 0, count: 0 };
-    gradeMap[student.grade].total += student.score;
-    gradeMap[student.grade].count += 1;
-  });
-
-  const classPerformance = Object.entries(gradeMap).map(([grade, { total, count }]) => ({
-    grade,
-    averageScore: Math.round(total / count),
-  }));
-
-  // Performance distribution (for pie chart)
-  const distribution = {
-    excellent: 0, // 90–100
-    good: 0,      // 80–89
-    average: 0,   // 70–79
-    belowAverage: 0, // < 70
-  };
-
-  students.forEach((student) => {
-    if (student.score >= 90) distribution.excellent++;
-    else if (student.score >= 80) distribution.good++;
-    else if (student.score >= 70) distribution.average++;
-    else distribution.belowAverage++;
-  });
-
-  const performanceDistribution = [
-    { name: "Excellent (90-100)", value: distribution.excellent },
-    { name: "Good (80-89)", value: distribution.good },
-    { name: "Average (70-79)", value: distribution.average },
-    { name: "Below Average (<70)", value: distribution.belowAverage },
-  ];
 
   return {
     totalStudents,
@@ -84,8 +121,41 @@ export function computeDashboard(students: Student[]): DashboardSummary {
     averageSessionTime: avgSessionTime,
     activeStudents,
     topScorers,
-    topScorer,
-    performanceDistribution,
-    classPerformance
+    topScorer
   };
 }
+
+export function getClassPerformance(students: Student[]) {
+  const grouped: Record<string, Student[]> = {};
+
+  students.forEach((s) => {
+    if (!grouped[s.grade]) grouped[s.grade] = [];
+    grouped[s.grade].push(s);
+  });
+
+  return Object.entries(grouped).map(([grade, list]) => {
+    const averageScore =
+      list.reduce((acc, cur) => acc + cur.score, 0) / list.length;
+    return { class: grade, averageScore: Math.round(averageScore) };
+  });
+}
+
+
+export function getPerformanceDistribution(students: Student[]) {
+  let excellent = 0, good = 0, average = 0, needsImprovement = 0;
+
+  students.forEach((s) => {
+    if (s.accuracy >= 90) excellent++;
+    else if (s.accuracy >= 80) good++;
+    else if (s.accuracy >= 70) average++;
+    else needsImprovement++;
+  });
+
+  return [
+    { name: "Excellent", value: excellent },
+    { name: "Good", value: good },
+    { name: "Average", value: average },
+    { name: "Needs Improvement", value: needsImprovement },
+  ];
+}
+
