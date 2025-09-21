@@ -29,7 +29,7 @@ const StudentsDistribution = () => {
   const headerColor = isDarkMode ? "text-white" : "text-blue-primary"
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 my-6">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {/* Average performance barchart */}
       <div className="w-full h-120 p-6 bg-white shadow-lg rounded-xl dark:bg-gray-950">
         <Header 

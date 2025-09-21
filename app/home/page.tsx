@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import Leaderboard from "@/components/Leaderboard";
 import { useAppSelector } from "../redux";
 import { computeDashboard } from "@/utils";
+import StudentsList from "@/components/StudentsList";
 
 
 const HomePage = () => {
@@ -13,7 +14,7 @@ const HomePage = () => {
   const dashboardSummary = computeDashboard(allStudents);
 
   return (
-    <div className="flex w-full flex-col px-4 ">
+    <div className="grid gap-4 w-full px-4 ">
       <Header
         name="Extraordinary Technical College"
         description="Welcome back! Here is your latest update"
@@ -21,6 +22,7 @@ const HomePage = () => {
       <Card dashboardData={dashboardSummary} />
       <StudentsDistribution />
       <Leaderboard />
+      <StudentsList />
     </div>
   );
 };
