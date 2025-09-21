@@ -3,13 +3,22 @@ import { Eye } from "lucide-react"
 import Image from "next/image"
 import Header from "../Header"
 import { useAppSelector } from "@/app/redux"
-import { useState } from "react"
+import { useState } from "react";
 
-const StudentsList = () => {
-  const students = useAppSelector((state) => state.students);
+
+type StudentProps = Omit<Student, "streak" | "hours">;
+type StudentCardProps = StudentProps & { index: number }
+
+type StudentListProps = {
+  students: Student[]
+}
+
+const StudentsList = ({ students }: StudentListProps) => {
+  const isDarkMode = useAppSelector((state) => state.ui.isDarkMode)
+
   const [visibleCount, setVisibleCount] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedGrade, setSelectedGrade] = useState("All");
+  const [selectedGrade, setSelectedGrade] = useState("All grades");
 
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 8);
@@ -29,15 +38,17 @@ const StudentsList = () => {
   });
 
   const visibleStudents = filteredStudents.slice(0, visibleCount);
+  const headerColor = isDarkMode ? "text-white" : "text-blue-primary"
 
 
   return (
-    <div className="bg-white p-4 rounded-xl">
+    <div className="bg-white p-4 rounded-xl dark:bg-gray-950">
       <div className="flex justify-between">
           <Header 
             name="All Students"
             description="Complete student directory with performance details"
             isSmallText={true}
+            color={headerColor}
           />
           <div className="flex gap-2 items-center">
             <input
@@ -81,7 +92,8 @@ const StudentsList = () => {
           <div className="flex my-4 mx-auto justify-center">
             <button
               onClick={handleLoadMore}
-              className="p-2.5 border border-gray-300 shadow-lg rounded-lg text-[8px] font-semibold cursor-pointer hover:bg-gray-100"
+              className="p-2.5 border border-gray-300 shadow-lg rounded-lg text-[7px] 
+                font-semibold cursor-pointer hover:bg-gray-100 dark:bg-blue-300 dark:text-white dark:hover:text-blue-500"
             >
               Load More Students ({students.length - visibleCount} remaining)
             </button>
@@ -91,12 +103,9 @@ const StudentsList = () => {
   )
 }
 
-type StudentProps = Omit<Student, "streak" | "hours">;
-
-type StudentCardProps = StudentProps & { index: number }
 
 const StudentCard = ({ imageUrl, name, accuracy, score, grade, index}: StudentCardProps) => (
-    <div className="grid grid-cols-4 gap-1 items-center p-2 bg-white rounded-xl shadow-md">
+    <div className="grid grid-cols-4 gap-1 items-center p-2 bg-white border border-gray-200 rounded-xl shadow-md dark:bg-gray-950 dark:text-white">
       <div className="m-auto p-0">
         <Image src={`/${imageUrl}`} alt="student" width={20} height={20} className="border rounded-full" />
       </div>
@@ -111,7 +120,7 @@ const StudentCard = ({ imageUrl, name, accuracy, score, grade, index}: StudentCa
         </div>
       </div>
       <div className="py-1 border border-gray-300 shadow-lg rounded-lg">
-        <Eye size={10} className="mx-auto"/>
+        <Eye size={10} className="mx-auto" />
       </div>
     </div>
 )

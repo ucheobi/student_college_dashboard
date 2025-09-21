@@ -14,16 +14,16 @@ import {
 } from "recharts";
 import Header from "../Header";
 import { useAppSelector } from "@/app/redux";
-import { getClassPerformance, getPerformanceDistribution } from "@/utils";
+
+type StudentsDistributionProps = {
+  classPerformance: { class: string; averageScore: number }[];
+  performanceDistribution: { name: string; value: number }[]
+}
 
 const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#14b8a6"];
 
-const StudentsDistribution = () => {
+const StudentsDistribution = ({ classPerformance, performanceDistribution }: StudentsDistributionProps) => {
   const isDarkMode = useAppSelector((state) => state.ui.isDarkMode)
-  const students = useAppSelector((state) => state.students);
-
-  const classPerformance = getClassPerformance(students);
-  const performanceDistribution = getPerformanceDistribution(students);
   
   const tickColor = isDarkMode ? "#ffffff" : "";
   const headerColor = isDarkMode ? "text-white" : "text-blue-primary"
