@@ -17,7 +17,7 @@ const HomePage = () => {
   const mostLessons = getMostLessons(students);
 
   return (
-    <div className="grid gap-4 w-full px-4 ">
+    <div className="grid gap-4 w-full px-4">
       <Header
         name="Extraordinary Technical College"
         description="Welcome back! Here is your latest update"

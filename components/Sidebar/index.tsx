@@ -43,9 +43,9 @@ const Sidebar = () => {
 
         <nav className="z-10 w-full text-xs">
           <SidebarLink href="/" Icon={Home} label="Dashboard" />
-          <SidebarLink href="/timeline" Icon={Trophy} label="Leaderboard" />
-          <SidebarLink href="/search" Icon={Users} label="Students" />
-          <SidebarLink href="/users" Icon={ChartColumnIncreasing} label="Analytics" />
+          <SidebarLink href="/leaderboard" Icon={Trophy} label="Leaderboard" />
+          <SidebarLink href="/students" Icon={Users} label="Students" />
+          <SidebarLink href="/analytics" Icon={ChartColumnIncreasing} label="Analytics" />
           <SidebarLink href="/settings" Icon={Settings} label="Settings" />
         </nav>
       </div>
@@ -79,7 +79,7 @@ const SidebarLink = ({ href, Icon, label,  }: SidebarLinkProps) => {
 
     return (
         <Link href={href} className="w-full text-[10px]">
-            <div className={`flex relative rounded-xl ml-10 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
+            <div className={`flex relative rounded-xl ml-10 mb-1 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
                     ${isActive ? "bg-blue-primary text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}>
 
                 <Icon className={`h-4 w-6 text-gray-800 dark:text-gray-100 ${isActive ? "text-white" : ""}`} />

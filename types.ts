@@ -11,6 +11,10 @@ export type Student = {
   totalLessons?: number;
 };
 
+export type StudentListProps = {
+  students: Student[]
+}
+
 type ClassPerformance = { 
   grade: string; 
   averageScore: number 

@@ -6,7 +6,6 @@ type DashboardProps =  {
     dashboardData: DashboardSummary
 }
 
-
 const Card = ({ dashboardData }: DashboardProps) => {
     const { totalClasses, totalStudents, averagePerformance, topPerformer } = dashboardData
 
