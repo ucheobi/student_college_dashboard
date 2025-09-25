@@ -3,7 +3,7 @@
 import Header from "../Header";
 import { Flame, Trophy, Zap } from "lucide-react"
 import { useAppSelector } from "@/app/redux";
-import { DashboardSummary, Student } from "@/types";
+import { Student } from "@/types";
 import LeaderboardCard from "./LeaderboardCard";
 
 type MostLessons = {
@@ -11,13 +11,14 @@ type MostLessons = {
     lessons: number;
 }
 type LeaderboardProps = { 
-    dashboardData: DashboardSummary;
-    mostLessons:  MostLessons | null
+    mostLessons:  MostLessons | null;
+    topScorer: Student; 
+    topScorers: Student[]; 
+    longestStreak: Student;
 }
 
-const Leaderboard = ({ mostLessons, dashboardData}: LeaderboardProps) => {
+const Leaderboard = ({ mostLessons, topScorer, topScorers, longestStreak }: LeaderboardProps) => {
     const isDarkMode = useAppSelector((state) => state.ui.isDarkMode);
-    const { topScorer, topScorers, longestStreak } = dashboardData;
 
     const headerColor = isDarkMode ? "text-white" : "text-blue-primary";
     

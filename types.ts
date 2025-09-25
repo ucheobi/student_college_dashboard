@@ -9,6 +9,13 @@ export type Student = {
   hours: number;
   imageUrl: string;
   totalLessons?: number;
+  skills: {
+    vocabulary: number;
+    grammar: number;
+    punctuation: number;
+    listening: number;
+    speaking: number;
+  };
 };
 
 export type StudentListProps = {
@@ -39,6 +46,7 @@ export type DashboardSummary = {
   activeStudents: number;
   topScorers: Student[];
   topScorer: Student;
+  totalLessonsCompleted: number;
 };
 
 export type StudentsDistributionType = {

@@ -1,81 +1,124 @@
 import { Student, DashboardSummary } from "@/types";
 
-export function computeDashboard(students: Student[] = []): DashboardSummary {
+export const computeDashboard = (students: Student[] = []): DashboardSummary => {
   if (!students || students.length === 0 ) {
     return {
       totalStudents: 0,
       totalClasses: 0,
       averagePerformance: "",
       topPerformer: {
-        id: "", 
-        name: "", 
-        grade: "", 
+        id: "",
+        name: "",
+        grade: "",
         imageUrl: "",
         score: 0,
         accuracy: 0,
         sessions: 0,
         streak: 0,
-        hours: 0
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
       },
       currentChampion: {
-        id: "", 
-        name: "", 
-        grade: "", 
+        id: "",
+        name: "",
+        grade: "",
         imageUrl: "",
         streak: 0,
         score: 0,
         accuracy: 0,
         sessions: 0,
-        hours: 0
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
       },
       longestStreak: {
         id: "",
-        name: "", 
+        name: "",
         grade: "",
         score: 0,
         imageUrl: "",
         accuracy: 0,
         sessions: 0,
         streak: 0,
-        hours: 0
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
       },
       mostActive: {
-        id: "", 
-        name: "", 
-        grade: "", 
+        id: "",
+        name: "",
+        grade: "",
         sessions: 0,
         imageUrl: "",
         score: 0,
         accuracy: 0,
         streak: 0,
-        hours: 0
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
       },
       highestAccuracy: {
-        id: "", 
-        name: "", 
-        grade: "", 
+        id: "",
+        name: "",
+        grade: "",
         imageUrl: "",
         accuracy: 0,
         score: 0,
         sessions: 0,
         streak: 0,
-        hours: 0
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
       },
       totalLearningHours: 0,
       averageSessionTime: "",
       activeStudents: 0,
       topScorers: [],
       topScorer: {
-        id: "", 
-        name: "", 
+        id: "",
+        name: "",
         imageUrl: "",
-        grade: "", 
+        grade: "",
         accuracy: 0,
         score: 0,
         sessions: 0,
         streak: 0,
-        hours: 0
-      }
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
+      },
+      totalLessonsCompleted: 0
     };
   }
   const totalStudents = students.length;
@@ -113,6 +156,10 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
   const topScorer = [...students]
     .sort((a, b) => b.score - a.score)[0];
 
+  const totalLessonsCompleted = students.reduce(
+    (sum, s) => sum + estimateLessonsFromStudentHour(s),
+    0
+  )
 
   return {
     totalStudents,
@@ -127,11 +174,12 @@ export function computeDashboard(students: Student[] = []): DashboardSummary {
     averageSessionTime: avgSessionTime,
     activeStudents,
     topScorers,
-    topScorer
+    topScorer,
+    totalLessonsCompleted
   };
 }
 
-export function getClassPerformance(students: Student[]) {
+export const getClassPerformance = (students: Student[]) => {
   const grouped: Record<string, Student[]> = {};
 
   students.forEach((s) => {
@@ -147,7 +195,7 @@ export function getClassPerformance(students: Student[]) {
 }
 
 
-export function getPerformanceDistribution(students: Student[]) {
+export const getPerformanceDistribution = (students: Student[]) => {
   let excellent = 0, good = 0, average = 0, needsImprovement = 0;
 
   students.forEach((s) => {
@@ -165,7 +213,7 @@ export function getPerformanceDistribution(students: Student[]) {
   ];
 }
 
-export function estimateLessonsFromStudent(student: Student, lessonHours = 0.5) {
+export const estimateLessonsFromStudentHour = (student: Student, lessonHours = 0.5) => {
   if (typeof student.totalLessons === "number") return student.totalLessons;
   if (typeof student.sessions === "number" && student.sessions > 0) return student.sessions;
   if (typeof student.hours === "number" && student.hours > 0)
@@ -173,16 +221,44 @@ export function estimateLessonsFromStudent(student: Student, lessonHours = 0.5) 
   return 0;
 }
 
-export function getMostLessons(students: Student[]) {
+export const getMostLessons = (students: Student[]) => {
   if (!students || students.length === 0) return null;
 
   let best: { student: Student; lessons: number } | null = null;
 
   for (const s of students) {
-    const lessons = estimateLessonsFromStudent(s);
+    const lessons = estimateLessonsFromStudentHour(s);
     if (!best || lessons > best.lessons) best = { student: s, lessons };
   }
 
   return best;
 }
 
+export const computeAverageSkills = (students: Student[]) => {
+  const totalSkills = {
+    vocabulary: 0,
+    grammar: 0,
+    punctuation: 0,
+    listening: 0,
+    speaking: 0,
+  };
+
+
+  students.forEach(s => {
+    totalSkills.vocabulary +=  s.skills.vocabulary;
+    totalSkills.grammar += s.skills.grammar;
+    totalSkills.punctuation += s.skills.punctuation;
+    totalSkills.listening += s.skills.listening;
+    totalSkills.speaking += s.skills.speaking;
+  });
+
+  const count = students.length;
+
+  return {
+    vocabulary: Math.round(totalSkills.vocabulary / count),
+    grammar: Math.round(totalSkills.grammar / count),
+    punctuation: Math.round(totalSkills.punctuation / count),
+    listening: Math.round(totalSkills.listening / count),
+    speaking: Math.round(totalSkills.speaking / count),
+  };
+}
