@@ -23,6 +23,7 @@ import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import studentsReducer from "@/state/studentsSlice";
 import uiReducer from "@/state/uiSlice";
+import userReducer from "@/state/userSlice";
 
 /* REDUX PERSISTENCE */
 const createNoopStorage = () => {
@@ -54,6 +55,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   students: studentsReducer,
   ui: uiReducer,
+  user: userReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
