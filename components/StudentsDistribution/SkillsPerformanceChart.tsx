@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import Header from "../Header";
 import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
@@ -22,7 +22,7 @@ const BAR_COLORS: Record<string, string> = {
 };
 
 type SkillPerformanceChartProps = {
-    students: Student[]
+    students: StudentType[]
 }
 
 const SkillPerformanceChart = ({ students }: SkillPerformanceChartProps) => {
@@ -113,7 +113,11 @@ const SkillPerformanceChart = ({ students }: SkillPerformanceChartProps) => {
 
         {/* Hard-coded improvement */}
       <div className="grid gap-2 p-4 rounded-lg bg-gray-100">
-        <h4 className="text-xs font-semibold">Month-over-Month Improvement</h4>
+        <Header 
+          name="Month-over-Month Improvement"
+          color=""
+          isSmallText
+        />
         <div className="text-[8px] grid grid-cols-2 gap-2">
             <div className="grid grid-cols-2 p-2 bg-white items-end rounded-md ">
                 <span>Vocabulary</span>

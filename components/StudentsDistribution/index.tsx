@@ -13,21 +13,18 @@ const StudentsDistribution = ({ classPerformance, performanceDistribution }: Stu
   const isDarkMode = useAppSelector((state) => state.ui.isDarkMode)
   
   const tickColor = isDarkMode ? "#ffffff" : "";
-  const headerColor = isDarkMode ? "text-white" : "text-blue-primary";
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {/* Average performance barchart */}
       <AveragePerformanceBarchart 
         classPerformance={classPerformance}
-        headerColor={headerColor}
         tickColor={tickColor}
       />
 
       {/* Performance distribution pie chart */}
       <PerformanceDistributionPiechart 
         performanceDistribution={performanceDistribution}
-        headerColor={headerColor} 
       /> 
     </div>
   );

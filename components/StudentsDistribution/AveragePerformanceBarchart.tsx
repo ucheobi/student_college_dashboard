@@ -3,17 +3,15 @@ import Header from "../Header"
 
 type AveragePerformanceBarchartProps = {
     classPerformance: { class: string; averageScore: number }[];
-    headerColor: string;
     tickColor: string;
 }
 
-const AveragePerformanceBarchart = ({ classPerformance, headerColor, tickColor }: AveragePerformanceBarchartProps) => {
+const AveragePerformanceBarchart = ({ classPerformance, tickColor }: AveragePerformanceBarchartProps) => {
 
     return (
         <div className="w-full h-120 p-6 bg-white shadow-lg rounded-xl dark:bg-gray-950">
         <Header 
           name="Average Performance by Grade" 
-          color={headerColor} 
           isSmallText={true}
           description="Student distribution across different grades"  
         />

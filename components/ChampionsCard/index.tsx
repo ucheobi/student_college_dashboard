@@ -1,11 +1,11 @@
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import Image from "next/image";
 
-type Students = {
-    students: Student[]
+type ChampionsCardProps = {
+    students: StudentType[]
 }
 
-const ChampionsCard = ({ students }: Students) => {
+const ChampionsCard = ({ students }: ChampionsCardProps) => {
     return (
         <div className="flex items-end gap-6 my-4 justify-end pb-4">
             <ChampionsList 

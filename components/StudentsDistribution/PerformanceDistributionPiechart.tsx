@@ -4,17 +4,16 @@ import { COLORS } from "@/constants"
 
 type PerformanceDistributionPieChartProps = {
     performanceDistribution: { name: string; value: number }[];
-    headerColor: string;
 }
 
-const PerformanceDistributionPiechart = ({ performanceDistribution, headerColor }: PerformanceDistributionPieChartProps) => (
+const PerformanceDistributionPiechart = ({ performanceDistribution }: PerformanceDistributionPieChartProps) => (
     <div className="h-120 bg-white shadow rounded-xl p-4 dark:bg-gray-950">
     <div className="w-full h-80 mb-6">
       <Header 
-        name="Performance Distribution" 
-        color={headerColor} 
+        name="Student Performance Distribution" 
         description="Overall accuracy breakdown across all students" 
         isSmallText={true}
+        color=""
       />
       <ResponsiveContainer className="pb-10">
         <PieChart>

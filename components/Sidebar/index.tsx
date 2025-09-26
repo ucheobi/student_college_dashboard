@@ -31,7 +31,7 @@ const Sidebar = () => {
         <div className="flex items-center gap-3 border-b px-8 py-4 mb-4 border-gray-200 dark:border-gray-700">
           <Image src="/logo.png" alt="Logo" width={40} height={40} />
           <div>
-            <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
+            <h3 className="text-md font-bold text-sky-500 tracking-wide dark:text-gray-200">
               ExtraCollege
             </h3>
             <div className="mt-1 flex items-start gap-2">
@@ -54,7 +54,7 @@ const Sidebar = () => {
         <div className="flex items-center gap-3">
           <Image src="/logo.png" alt="Logo" width={40} height={40} />
           <div>
-            <h3 className="text-md font-bold text-blue-primary tracking-wide dark:text-gray-200">
+            <h3 className="text-md font-bold text-sky-500 tracking-wide dark:text-gray-200">
               School Admin
             </h3>
             <p className="text-xs text-gray-500">School Admin</p>
@@ -79,8 +79,8 @@ const SidebarLink = ({ href, Icon, label,  }: SidebarLinkProps) => {
 
     return (
         <Link href={href} className="w-full text-[10px]">
-            <div className={`flex relative rounded-xl ml-10 mb-1 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-blue-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
-                    ${isActive ? "bg-blue-primary text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}>
+            <div className={`flex relative rounded-xl ml-10 mb-1 cursor-pointer w-3/4 items-center gap-2 transition-colors hover:bg-sky-500 hover:*:text-white dark:bg-black  dark:hover:bg-gray-700
+                    ${isActive ? "bg-sky-500 text-white dark:bg-gray-600" : ""} justify-start px-8 py-3`}>
 
                 <Icon className={`h-4 w-6 text-gray-800 dark:text-gray-100 ${isActive ? "text-white" : ""}`} />
                 <span className={`font-medium text-gray-800 dark:text-gray-100 ${isActive ? "text-white " : ""}`}>{label}</span>

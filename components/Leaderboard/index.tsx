@@ -2,7 +2,6 @@
 
 import Header from "../Header";
 import { Flame, Trophy, Zap } from "lucide-react"
-import { useAppSelector } from "@/app/redux";
 import { Student } from "@/types";
 import LeaderboardCard from "./LeaderboardCard";
 
@@ -18,9 +17,6 @@ type LeaderboardProps = {
 }
 
 const Leaderboard = ({ mostLessons, topScorer, topScorers, longestStreak }: LeaderboardProps) => {
-    const isDarkMode = useAppSelector((state) => state.ui.isDarkMode);
-
-    const headerColor = isDarkMode ? "text-white" : "text-blue-primary";
     
   return (
     <div className="bg-white p-4 rounded-xl dark:bg-gray-950">
@@ -28,7 +24,6 @@ const Leaderboard = ({ mostLessons, topScorer, topScorers, longestStreak }: Lead
             name="School Leaderboard - Top Champions" 
             description="Our hghest performing students this month with points and achievements" 
             isSmallText={true}
-            color={headerColor}
         />
 
        <div className="grid grid-cols-5 gap-4 w-full">
