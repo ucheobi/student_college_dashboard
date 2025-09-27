@@ -1,6 +1,6 @@
-import { Student, DashboardSummary } from "@/types";
+import { StudentType, DashboardSummaryProps } from "@/types";
 
-export const computeDashboard = (students: Student[] = []): DashboardSummary => {
+export const computeDashboard = (students: StudentType[] = []): DashboardSummaryProps => {
   if (!students || students.length === 0 ) {
     return {
       totalStudents: 0,
@@ -179,8 +179,8 @@ export const computeDashboard = (students: Student[] = []): DashboardSummary => 
   };
 }
 
-export const getClassPerformance = (students: Student[]) => {
-  const grouped: Record<string, Student[]> = {};
+export const getClassPerformance = (students: StudentType[]) => {
+  const grouped: Record<string, StudentType[]> = {};
 
   students.forEach((s) => {
     if (!grouped[s.grade]) grouped[s.grade] = [];
@@ -195,7 +195,7 @@ export const getClassPerformance = (students: Student[]) => {
 }
 
 
-export const getPerformanceDistribution = (students: Student[]) => {
+export const getPerformanceDistribution = (students: StudentType[]) => {
   let excellent = 0, good = 0, average = 0, needsImprovement = 0;
 
   students.forEach((s) => {
@@ -213,7 +213,7 @@ export const getPerformanceDistribution = (students: Student[]) => {
   ];
 }
 
-export const estimateLessonsFromStudentHour = (student: Student, lessonHours = 0.5) => {
+export const estimateLessonsFromStudentHour = (student: StudentType, lessonHours = 0.5) => {
   if (typeof student.totalLessons === "number") return student.totalLessons;
   if (typeof student.sessions === "number" && student.sessions > 0) return student.sessions;
   if (typeof student.hours === "number" && student.hours > 0)
@@ -221,10 +221,10 @@ export const estimateLessonsFromStudentHour = (student: Student, lessonHours = 0
   return 0;
 }
 
-export const getMostLessons = (students: Student[]) => {
+export const getMostLessons = (students: StudentType[]) => {
   if (!students || students.length === 0) return null;
 
-  let best: { student: Student; lessons: number } | null = null;
+  let best: { student: StudentType; lessons: number } | null = null;
 
   for (const s of students) {
     const lessons = estimateLessonsFromStudentHour(s);
@@ -234,7 +234,7 @@ export const getMostLessons = (students: Student[]) => {
   return best;
 }
 
-export const computeAverageSkills = (students: Student[]) => {
+export const computeAverageSkills = (students: StudentType[]) => {
   const totalSkills = {
     vocabulary: 0,
     grammar: 0,

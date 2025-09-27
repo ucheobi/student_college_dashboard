@@ -1,3 +1,5 @@
+import { TimeZone } from "./types";
+
 const students = [
     { "id": "S001", "name": "Ahan Kumar", "grade": "Grade 8", "score": 830, "accuracy": 96, "sessions": 68, "imageUrl": "p1.jpeg", "streak": 15, "hours": 120, skills: {
       vocabulary: 82,
@@ -284,3 +286,41 @@ const students = [
 ];
 
 export default students;
+
+
+export const user = {
+  profileSettings: {
+    fullName: "Admin User",
+    email: "admin@example.com",
+    phoneNumber: "+49-178-777-000",
+  },
+  systemSettings: {
+    language: "English",
+    timezone: TimeZone
+  }, 
+  notification: {
+    email: "email",
+    reports: "reports",
+    alert: "alerts"
+  },
+  dataManagement: {
+    student: {
+        id: "",
+        name: "",
+        grade: "",
+        imageUrl: "",
+        score: 0,
+        accuracy: 0,
+        sessions: 0,
+        streak: 0,
+        hours: 0,
+        skills: {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0
+        }
+      },
+  }
+}

@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 type UserState = {
     profileSettings: ProfileSettingsProps,
     systemSettings: SystemSettingsProps,
-    notification: NotificationProps
+    notificationSettings: NotificationProps
 }
 
 const initialState: UserState = {
@@ -17,10 +17,10 @@ const initialState: UserState = {
         language: "English",
         timeZone: TimeZone.UTC
       }, 
-      notification: {
-        email: "email",
-        reports: "reports",
-        alert: "alerts"
+      notificationSettings: {
+        email: true,
+        reports: false,
+        alert: true
       },
     
 }
@@ -41,14 +41,14 @@ export const userSlice = createSlice({
         ) => {
             state.systemSettings = action.payload;
         },
-        updateNotification: (
+        updateNotificationSettings: (
             state,
-            action: PayloadAction<UserState["notification"]>
+            action: PayloadAction<Partial<UserState["notificationSettings"]>>
         ) => {
-            state.notification = action.payload;
+            state.notificationSettings = {...state.notificationSettings, ...action.payload};
         },
     }
 })
 
-export const { updateSystemSettings, updateProfileSettings, updateNotification } = userSlice.actions;
+export const { updateSystemSettings, updateProfileSettings, updateNotificationSettings } = userSlice.actions;
 export default userSlice.reducer;

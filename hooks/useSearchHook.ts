@@ -1,7 +1,7 @@
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import { useState } from "react";
 
-const useSearchHook  = ( students : Student[]) => {
+const useSearchHook  = ( students : StudentType[]) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedGrade, setSelectedGrade] = useState("All grades");
 

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import DashboardWrapper from "./dashboardWrapper";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={inter.className}
+        className={roboto.className}
       >
         <DashboardWrapper>{children}</DashboardWrapper>
       </body>

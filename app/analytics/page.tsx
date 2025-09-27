@@ -5,21 +5,61 @@ import { computeDashboard, getPerformanceDistribution } from "@/utils";
 import { useAppSelector } from "../redux";
 import DashboardCard from "@/components/DashboardCard";
 import PerformanceDistributionPiechart from "@/components/StudentsDistribution/PerformanceDistributionPiechart";
-import SkillPerformanceChart from "@/components/StudentsDistribution/SkillsPerformanceChart";
+import { useMemo } from "react";
+import AveragePerformanceBySkill from "@/components/StudentsDistribution/AveragePerformanceBySkill";
+import MonthlyImprovementReport from "@/components/StudentsDistribution/MonthlyImprovement";
+import PerformanceBarChart from "@/components/StudentsDistribution/PerformanceBarChart";
+
+const SKILL_COLORS: Record<string, string> = {
+  vocabulary: "bg-blue-500",
+  grammar: "bg-green-500",
+  punctuation: "bg-yellow-500",
+  listening: "bg-purple-500",
+  speaking: "bg-red-500",
+};
+
+const BAR_COLORS: Record<string, string> = {
+  vocabulary: "#3B82F6",  
+  grammar: "#10B981",     
+  punctuation: "#F59E0B", 
+  listening: "#8B5CF6",  
+  speaking: "#EF4444",  
+};
 
 const AnalyticsPage = () => {
-    const isDarkMode = useAppSelector((state) => state.ui.isDarkMode)
     const students = useAppSelector((state) => state.students);
 
     const { activeStudents, totalLearningHours, totalLessonsCompleted, averageSessionTime } = computeDashboard(students);
     const performanceDistribution = getPerformanceDistribution(students);
-    
-    const headerColor = isDarkMode ? "text-white" : "text-blue-primary";
 
+    const averageSkills = useMemo(() => {
+        const totalSkills: Record<string, number> = {
+          vocabulary: 0,
+          grammar: 0,
+          punctuation: 0,
+          listening: 0,
+          speaking: 0,
+        };
+        const count = students.length;
+    
+        students.forEach((student) => {
+          totalSkills.vocabulary += student.skills.vocabulary;
+          totalSkills.grammar += student.skills.grammar;
+          totalSkills.punctuation += student.skills.punctuation;
+          totalSkills.listening += student.skills.listening;
+          totalSkills.speaking += student.skills.speaking;
+        });
+    
+        return Object.keys(totalSkills).map((skill) => ({
+          skill,
+          average: Math.round(totalSkills[skill] / count),
+          color: SKILL_COLORS[skill],
+        }));
+      }, [students]);
   
   return (
     <div className="grid w-full gap-4 px-4 mb-4">
-      <Header name="Analytics & Reports" />
+      <Header name="Analytics & Reports" color="" />
       <div className="grid-col-1 m-auto grid w-full gap-4 md:w-full md:grid-cols-2 lg:grid-cols-4">
             <DashboardCard
             label="Total Learning Hours"
@@ -45,16 +85,22 @@ const AnalyticsPage = () => {
             />
        </div>
 
-       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 h-full">
-            <div className="h-full">
-                <PerformanceDistributionPiechart 
-                    performanceDistribution={performanceDistribution} 
-                    headerColor={headerColor}
-                />
-             </div>
-            <div className="h-full">
-                <SkillPerformanceChart students={students} />
-            </div>
+       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
+          <PerformanceDistributionPiechart 
+              performanceDistribution={performanceDistribution} 
+          />
+
+          <AveragePerformanceBySkill
+              averageSkills={averageSkills}
+              skillColors={SKILL_COLORS}
+          />
+
+          <PerformanceBarChart 
+              averageSkills={averageSkills}
+              barColor={BAR_COLORS}
+          />
+
+          <MonthlyImprovementReport />
        </div>
     </div>
   );

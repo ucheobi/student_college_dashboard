@@ -18,7 +18,8 @@ const LeaderboardPage = () => {
     const mostLessons = getMostLessons(students)
     const [selectedMonth, setSelectedMonth] = useState("This Month")
 
-    const { grades, searchTerm, selectedGrade, handleSearchTerm, handleSelectedGrade} = useSearchHook(students)
+    const { grades, searchTerm, filteredStudents, selectedGrade,  handleSearchTerm, handleSelectedGrade} = useSearchHook(topScorers);
+
 
   return (
     <div className="grid gap-2 w-full px-4">
@@ -63,7 +64,6 @@ const LeaderboardPage = () => {
                     
                     ))}
                 </select>
-
             </div>
 
             <div className="">
@@ -80,7 +80,7 @@ const LeaderboardPage = () => {
                 description="All students ranked by points earned this month"
                 isSmallText={true}
             />
-            {topScorers.slice(0,8).map((leaderboard, index) => (
+            {filteredStudents.map((leaderboard, index) => (
                 <LeaderboardCard  
                     key={index}
                     name={leaderboard.name}

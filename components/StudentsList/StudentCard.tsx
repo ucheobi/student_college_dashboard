@@ -2,7 +2,7 @@ import { StudentType } from "@/types";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 
-type StudentProps = Omit<StudentType, "streak" | "hours">;
+type StudentProps = Omit<StudentType, "streak" | "hours" | "skills">;
 type StudentCardProps = StudentProps & { index: number }
 
 const StudentCard = ({ imageUrl, name, accuracy, score, grade, index}: StudentCardProps) => (

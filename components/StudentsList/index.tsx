@@ -5,18 +5,16 @@ import SearchFilter from "../Search"
 import useSearchHook from "@/hooks/useSearchHook"
 import StudentCard from "./StudentCard";
 
-
 const StudentsList = ({ students }: StudentListProps) => {
  const [visibleCount, setVisibleCount] = useState(8);
 
- const { grades, searchTerm, selectedGrade, filteredStudents, handleSearchTerm, handleSelectedGrade} = useSearchHook(students)
+ const { grades, searchTerm, selectedGrade, filteredStudents, handleSearchTerm, handleSelectedGrade} = useSearchHook(students);
 
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 8);
   }
 
   const visibleStudents = filteredStudents.slice(0, visibleCount);
-
 
   return (
     <div className="bg-white p-4 rounded-xl dark:bg-gray-950">
@@ -33,11 +31,9 @@ const StudentsList = ({ students }: StudentListProps) => {
             selectedGrade={selectedGrade}
             handleSearchTerm={handleSearchTerm}
             handleSelectedGrade={handleSelectedGrade} 
-          />
-          
+          />     
       </div>
       
-
       <div className="grid grid-cols-4 gap-3 w-full">
         {visibleStudents.map((student, index) => (
           <StudentCard
@@ -52,7 +48,7 @@ const StudentsList = ({ students }: StudentListProps) => {
         ))}
       </div>
 
-      {/* Load Morre Students */}
+      {/* Load More Students */}
         {visibleCount < filteredStudents.length && (
           <div className="flex my-4 mx-auto justify-center">
             <button
