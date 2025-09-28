@@ -1,8 +1,8 @@
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import { Eye, HandFist } from "lucide-react";
 import Image  from "next/image"
 
-type LeaderboardCardProps = Omit<Student, "skills"> & { index: number, variant?: "default" | "compact" };
+type LeaderboardCardProps = Omit<StudentType, "skills"> & { index: number, variant?: "default" | "compact" };
 
 
 const LeaderboardCard = ({ name, imageUrl, grade, accuracy, score, hours, streak,  index, variant = "default" }: LeaderboardCardProps) => {

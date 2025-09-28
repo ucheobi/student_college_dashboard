@@ -9,22 +9,9 @@ import { useMemo } from "react";
 import AveragePerformanceBySkill from "@/components/StudentsDistribution/AveragePerformanceBySkill";
 import MonthlyImprovementReport from "@/components/StudentsDistribution/MonthlyImprovement";
 import PerformanceBarChart from "@/components/StudentsDistribution/PerformanceBarChart";
+import { SKILL_COLORS, BAR_COLORS } from "@/constants";
 
-const SKILL_COLORS: Record<string, string> = {
-  vocabulary: "bg-blue-500",
-  grammar: "bg-green-500",
-  punctuation: "bg-yellow-500",
-  listening: "bg-purple-500",
-  speaking: "bg-red-500",
-};
 
-const BAR_COLORS: Record<string, string> = {
-  vocabulary: "#3B82F6",  
-  grammar: "#10B981",     
-  punctuation: "#F59E0B", 
-  listening: "#8B5CF6",  
-  speaking: "#EF4444",  
-};
 
 const AnalyticsPage = () => {
     const students = useAppSelector((state) => state.students);

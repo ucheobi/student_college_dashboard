@@ -19,7 +19,8 @@ export type StudentType = {
 };
 
 export type StudentListProps = {
-  students: StudentType[]
+  students: StudentType[],
+  variant?: "default" | "compact",
 }
 
 type ClassPerformanceProps = { 

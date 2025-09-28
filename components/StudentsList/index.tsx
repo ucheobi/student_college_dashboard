@@ -5,8 +5,8 @@ import SearchFilter from "../Search"
 import useSearchHook from "@/hooks/useSearchHook"
 import StudentCard from "./StudentCard";
 
-const StudentsList = ({ students }: StudentListProps) => {
- const [visibleCount, setVisibleCount] = useState(8);
+const StudentsList = ({ students, variant }: StudentListProps) => {
+ const [visibleCount, setVisibleCount] = useState(16);
 
  const { grades, searchTerm, selectedGrade, filteredStudents, handleSearchTerm, handleSelectedGrade} = useSearchHook(students);
 
@@ -34,21 +34,17 @@ const StudentsList = ({ students }: StudentListProps) => {
           />     
       </div>
       
-      <div className="grid grid-cols-4 gap-3 w-full">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
         {visibleStudents.map((student, index) => (
           <StudentCard
             key={index}
-            imageUrl={student.imageUrl}
-            name={student.name}
-            accuracy={student.accuracy}
-            score={student.score}
-            grade={student.grade}
             index={index}
+            student={student}
+            variant={variant}
           />
         ))}
       </div>
 
-      {/* Load More Students */}
         {visibleCount < filteredStudents.length && (
           <div className="flex my-4 mx-auto justify-center">
             <button

@@ -2,18 +2,18 @@
 
 import Header from "../Header";
 import { Flame, Trophy, Zap } from "lucide-react"
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import LeaderboardCard from "./LeaderboardCard";
 
 type MostLessons = {
-    student: Student;
+    student: StudentType;
     lessons: number;
 }
 type LeaderboardProps = { 
     mostLessons:  MostLessons | null;
-    topScorer: Student; 
-    topScorers: Student[]; 
-    longestStreak: Student;
+    topScorer: StudentType; 
+    topScorers: StudentType[]; 
+    longestStreak: StudentType;
 }
 
 const Leaderboard = ({ mostLessons, topScorer, topScorers, longestStreak }: LeaderboardProps) => {

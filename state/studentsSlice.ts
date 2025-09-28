@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Student } from "@/types";
+import { StudentType } from "@/types";
 import studentsMockData from "@/mockData";
 
 const studentsSlice = createSlice({
   name: "students",
-  initialState: studentsMockData as Student[],
+  initialState: studentsMockData as StudentType[],
   reducers: {
-    setStudents: (state, action: PayloadAction<Student[]>) => action.payload,
+    setStudents: (state, action: PayloadAction<StudentType[]>) => action.payload,
   },
 });
 
